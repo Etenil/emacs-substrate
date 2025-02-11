@@ -1,0 +1,3 @@
+* Provide a one-script install for busy people
+* Add config for popular vim-like input system
+* Pick useful bits of config from bedrock extras

@@ -8,14 +8,15 @@ A clean basis to organically grow your config onto.
 
 This is a minimal Emacs base config. Here's the short of the philosophy:
 
- - Focus on using default, built-in Emacs behavior
+ - Focus on using default, built-in Emacs behaviour
  - Emacs-lisp centric, encourage configuration through code
- - Allow update and upgrade of substrate
- - No magic
+ - Provide an upgrade path for Substrate
+ - Stay minimal, only include as little packages and config as possible
+ - Keep to the project vision, even though users are free to turn features off
 
 ## Installation
 
-To install emacs-substrate, clone this repository somewhere, then create the files:
+To install emacs-substrate, clone this repository somewhere, then create the following 2 files:
 
 ```lisp
 ;; ~/.emacs.d/early-init.el
@@ -62,6 +63,12 @@ Emacs 29.1 is, as of 2023-09-04, the latest stable release. The specific feature
 
 ## Credits
 
+This project is a radical fork of [Emacs-bedrock](https://codeberg.org/ashton314/emacs-bedrock)
+
+Maintainer of Emacs-substrate:
+
+- [Gene Pasquet](https://github.com/Etenil)
+
 Creator and maintainer of Emacs-bedrock:
 
- - Ashton Wiersdorf https://lambdaland.org
+ - [Ashton Wiersdorf](https://lambdaland.org)
