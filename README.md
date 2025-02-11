@@ -62,6 +62,6 @@ Emacs 29.1 is, as of 2023-09-04, the latest stable release. The specific feature
 
 ## Credits
 
-Creator and maintainer:
+Creator and maintainer of Emacs-bedrock:
 
  - Ashton Wiersdorf https://lambdaland.org
