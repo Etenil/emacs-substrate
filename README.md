@@ -21,8 +21,10 @@ This is a minimal Emacs base config. Here's the short of the philosophy:
 Copy and paste the following into a terminal:
 
 ```
-curl 
+curl https://raw.githubusercontent.com/Etenil/emacs-substrate/refs/heads/main/installer/installer.sh | bash
 ```
+
+This will install emacs-substrate in your `~/.emacs.d` folder. You can set the environment variable `EMACS_DIR` before running the script to install it in a different folder.
 
 ### Manually
 

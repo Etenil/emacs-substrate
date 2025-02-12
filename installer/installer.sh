@@ -21,3 +21,4 @@ cp emacs-substrate/installer/init.el init.el
 
 popd
 
+echo "All done! Enjoy Emacs Substrate!"
