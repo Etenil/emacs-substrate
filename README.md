@@ -16,6 +16,16 @@ This is a minimal Emacs base config. Here's the short of the philosophy:
 
 ## Installation
 
+### With automated script
+
+Copy and paste the following into a terminal:
+
+```
+curl 
+```
+
+### Manually
+
 To install emacs-substrate, clone this repository somewhere, then create the following 2 files:
 
 ```lisp
