@@ -51,7 +51,7 @@
     ;; Set up package and enable melpa
     (require 'package)
     (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-    (package-initialise)
+    (package-initialize)
 
     ;; Boostrap straight.el
     (defvar bootstrap-version)
