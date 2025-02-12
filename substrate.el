@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;       .⌒.	  ▗▄▄▖▗  ▖ ▗▖  ▗▄  ▄▄      ▄▄ ▗  ▖▗▄▄  ▄▄ ▄▄▄▖▗▄▄  ▗▖ ▄▄▄▖▗▄▄▖ ;;;
 ;;;     .#   #.	  ▐   ▐▌▐▌ ▐▌ ▗▘ ▘▐▘ ▘    ▐▘ ▘▐  ▌▐  ▌▐▘ ▘ ▐  ▐ ▝▌ ▐▌  ▐  ▐    ;;;
@@ -38,12 +39,24 @@
   :type 'boolean :group 'substrate)
 
 
+(defun substrate-set-theme (theme)
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+		(defun substrate--load-theme-daemon (frame)
+                  (with-selected-frame frame
+                    (load-theme theme t))
+                  ;; Run this hook only once.
+                  (remove-hook 'after-make-frame-functions
+                               #'substrate--load-theme-daemon)
+                  (fmakunbound 'substrate--load-theme-daemon)))
+    (load-theme theme t)))
+
 (defun substrate-init ()
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;;
-  ;;;   Basic settings
-  ;;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;   Basic settings
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; Package initialization
   ;;
@@ -69,9 +82,9 @@
 	  (goto-char (point-max))
 	  (eval-print-last-sexp)))
       (load bootstrap-file nil 'nomessage))
-      (setq straight-use-package-by-default t))
+    (setq straight-use-package-by-default t))
 
-  (setopt initial-major-mode 'fundamental-mode)  ; default mode for the *scratch* buffer
+  (setopt initial-major-mode 'fundamental-mode)	; default mode for the *scratch* buffer
   (setopt display-time-default-load-average nil) ; this information is useless for most
 
   ;; Automatically reread from disk if the underlying file changes
@@ -134,18 +147,18 @@ If the new path's directories does not exist, create them."
 
   ;; For help, see: https://www.masteringemacs.org/article/understanding-minibuffer-completion
 
-  (setopt enable-recursive-minibuffers t)                ; Use the minibuffer whilst in the minibuffer
-  (setopt completion-cycle-threshold 1)                  ; TAB cycles candidates
-  (setopt completions-detailed t)                        ; Show annotations
-  (setopt tab-always-indent 'complete)                   ; When I hit TAB, try to complete, otherwise, indent
+  (setopt enable-recursive-minibuffers t) ; Use the minibuffer whilst in the minibuffer
+  (setopt completion-cycle-threshold 1)	  ; TAB cycles candidates
+  (setopt completions-detailed t)	  ; Show annotations
+  (setopt tab-always-indent 'complete) ; When I hit TAB, try to complete, otherwise, indent
   (setopt completion-styles '(basic initials substring)) ; Different styles to match input to candidates
 
-  (setopt completion-auto-help 'always)                  ; Open completion always; `lazy' another option
-  (setopt completions-max-height 20)                     ; This is arbitrary
+  (setopt completion-auto-help 'always)	; Open completion always; `lazy' another option
+  (setopt completions-max-height 20)	; This is arbitrary
   (setopt completions-detailed t)
   (setopt completions-format 'one-column)
   (setopt completions-group t)
-  (setopt completion-auto-select 'second-tab)            ; Much more eager
+  (setopt completion-auto-select 'second-tab) ; Much more eager
 					;(setopt completion-auto-select t)                     ; See `C-h v completion-auto-select' for more possible values
 
   (keymap-set minibuffer-mode-map "TAB" 'minibuffer-complete) ; TAB acts more like how it does in the shell
@@ -164,14 +177,14 @@ If the new path's directories does not exist, create them."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; Mode line information
-  (setopt line-number-mode t)                        ; Show current line in modeline
-  (setopt column-number-mode t)                      ; Show column as well
+  (setopt line-number-mode t)	       ; Show current line in modeline
+  (setopt column-number-mode t)	       ; Show column as well
 
-  (setopt x-underline-at-descent-line nil)           ; Prettier underlines
-  (setopt switch-to-buffer-obey-display-actions t)   ; Make switching buffers more consistent
+  (setopt x-underline-at-descent-line nil) ; Prettier underlines
+  (setopt switch-to-buffer-obey-display-actions t) ; Make switching buffers more consistent
 
-  (setopt show-trailing-whitespace nil)      ; By default, don't underline trailing spaces
-  (setopt indicate-buffer-boundaries 'left)  ; Show buffer top and bottom in the margin
+  (setopt show-trailing-whitespace nil)	; By default, don't underline trailing spaces
+  (setopt indicate-buffer-boundaries 'left) ; Show buffer top and bottom in the margin
 
   ;; Enable horizontal scrolling
   (setopt mouse-wheel-tilt-scroll t)
@@ -183,8 +196,8 @@ If the new path's directories does not exist, create them."
   ;; (setopt tab-width 4)
 
   ;; Misc. UI tweaks
-  (blink-cursor-mode -1)                                ; Steady cursor
-  (pixel-scroll-precision-mode)                         ; Smooth scrolling
+  (blink-cursor-mode -1)		; Steady cursor
+  (pixel-scroll-precision-mode)		; Smooth scrolling
 
   ;; Use common keystrokes by default
   (when substrate-enable-cua-mode
@@ -193,7 +206,7 @@ If the new path's directories does not exist, create them."
   ;; Display line numbers in programming mode
   (when substrate-display-line-numbers
     (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-    (setopt display-line-numbers-width 3))           ; Set a minimum width
+    (setopt display-line-numbers-width 3)) ; Set a minimum width
 
   ;; Nice line wrapping when working with text
   (add-hook 'text-mode-hook 'visual-line-mode)
@@ -224,12 +237,12 @@ If the new path's directories does not exist, create them."
   (use-package evangelion-theme
     :if substrate-configure-theme
     :ensure t
-    :config (load-theme 'evangelion t))
+    :config (substrate-set-theme 'evangelion))
 
 ;;; Relegate automatic custom variables to their own file.
   (setq custom-file (expand-file-name "custom-vars.el"))
 
-) ;; End substrate-init
+  ) ;; End substrate-init
 
 (provide 'substrate)
 ;;; End of substrate.el

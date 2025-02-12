@@ -60,6 +60,21 @@ popd
 
 And restart emacs.
 
+## Setting a different theme
+
+To set a different theme, first disable the default theme from Substrate like so:
+
+```lisp
+(setopt substrate-configure-theme t)
+```
+
+Then set your favourite theme. Instead of using `load-theme`, use `substrate-set-theme`, as it will also work when running emacs as a daemon.
+
+```lisp
+(use-package nord-theme
+	:config (substrate-set-theme 'nord))
+```
+
 ## Screenshots
 
 What you should see on opening Emacs up with Substrate installed: a simple splash screen, [modus-vivendi](https://protesilaos.com/emacs/modus-themes) active, and the `help-quick` display at the bottom.
