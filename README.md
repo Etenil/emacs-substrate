@@ -38,13 +38,13 @@ To install emacs-substrate, clone this repository somewhere, then create the fol
 
 ## Screenshots
 
-What you should see on opening Emacs up with Bedrock installed: a simple splash screen, [modus-vivendi](https://protesilaos.com/emacs/modus-themes) active, and the `help-quick` display at the bottom.
+What you should see on opening Emacs up with Substrate installed: a simple splash screen, [modus-vivendi](https://protesilaos.com/emacs/modus-themes) active, and the `help-quick` display at the bottom.
 
-![Emacs using Bedrock configuration showing the splash screen with the quick help at the bottom](screenshots/basic_splash.png)
+![Emacs using Substrate configuration showing the splash screen with the quick help at the bottom](screenshots/substrate-home-screen.png)
 
 Basic code editing: line numbers and `hl-line-mode`.
 
-![Editing the source code of Emacs Bedrock's init.el file while using Bedrock configuration](screenshots/basic_code_editing.png)
+![Editing the source code of Emacs Substrate's substrate.el file while using Substrate configuration](screenshots/substrate-editing.png)
 
 ## Philosophy
 
@@ -54,7 +54,7 @@ TODO
 
 Emacs 29.1 or later.
 
-Emacs 29.1 is, as of 2023-09-04, the latest stable release. The specific features from Emacs 29.1 that Bedrock relies on are:
+Emacs 29.1 is, as of 2023-09-04, the latest stable release. The specific features from Emacs 29.1 that Substrate relies on are:
 
  - The `use-package` macro for configuration
  - Enhancements to the built-in completion help (`completions-auto-select`, `completion-auto-help`, etc.)
