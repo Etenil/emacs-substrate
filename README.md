@@ -48,6 +48,18 @@ To install emacs-substrate, clone this repository somewhere, then create the fol
 ;; The rest of your config below
 ```
 
+### How to update
+
+Emacs-substrate's code lives within the local clone of the git repository. Updating your installation is as simple as running `git pull` within that folder. If using the installer, do as follows:
+
+```
+pushd $HOME/.emacs.d/emacs-substrate
+git pull
+popd
+```
+
+And restart emacs.
+
 ## Screenshots
 
 What you should see on opening Emacs up with Substrate installed: a simple splash screen, [modus-vivendi](https://protesilaos.com/emacs/modus-themes) active, and the `help-quick` display at the bottom.
