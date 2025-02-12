@@ -48,6 +48,12 @@
   ;; Package initialization
   ;;
   (when substrate-initialise-packages
+    ;; Set up package and enable melpa
+    (require 'package)
+    (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+    (package-initialise)
+
+    ;; Boostrap straight.el
     (defvar bootstrap-version)
     (let ((bootstrap-file
 	   (expand-file-name
@@ -62,8 +68,8 @@
              'silent 'inhibit-cookies)
 	  (goto-char (point-max))
 	  (eval-print-last-sexp)))
-      (load bootstrap-file nil 'nomessage)
-      (setq straight-use-package-by-default t)))
+      (load bootstrap-file nil 'nomessage))
+      (setq straight-use-package-by-default t))
 
   (setopt initial-major-mode 'fundamental-mode)  ; default mode for the *scratch* buffer
   (setopt display-time-default-load-average nil) ; this information is useless for most
@@ -217,6 +223,7 @@ If the new path's directories does not exist, create them."
 
   (use-package evangelion-theme
     :if substrate-configure-theme
+    :ensure t
     :config (load-theme 'evangelion t))
 
 ;;; Relegate automatic custom variables to their own file.
