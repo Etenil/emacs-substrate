@@ -60,7 +60,36 @@ popd
 
 And restart emacs.
 
-## Setting a different theme
+## Customisation
+
+### Available settings
+
+Substrate can be configured through Emacs's built-in customisation framework. To access it, use `M-x customize` and search for `substrate`. Alternatively, set the options with `setopt` in your init file. The available options are:
+
+- `substrate-initialise-packages`: Initialise the substrate package system (straight.el) - default `t`
+- `substrate-enable-windmove`: Enable windmove to hop around windows with ctrl+arrow - default `t`
+- `substrate-display-startup-help`: Show a help window on startup - default `t`
+- `substrate-enable-which-key`: Use which-key to list available key combos - default `t`
+- `substrate-display-line-numbers`: Display line numbers on buffers - default `t`
+- `substrate-enable-cua-mode`: Enable CUA mode (`C-c` for copy, `C-p` for paste etc.) - default `t`
+- `substrate-configure-theme`: Configure the default theme - default `t`
+- `substrate-enable-evil`: Enable evil-mode and the Vi-like keyboard mapping - default `nil`
+
+If you'd rather use `setopt` to configure those variables, it can be used like so:
+
+```lisp
+;; Configure all the opposite defaults for substrate
+(setopt substrate-initialise-packages nil)
+(setopt substrate-enable-windmove nil)
+(setopt substrate-display-startup-help nil)
+(setopt substrate-enable-which-key nil)
+(setopt substrate-display-line-numbers nil)
+(setopt substrate-enable-cua-mode nil)
+(setopt substrate-configure-theme nil)
+(setopt substrate-enable-evil t)
+```
+
+### Setting a different theme
 
 To set a different theme, first disable the default theme from Substrate like so:
 
@@ -113,3 +142,5 @@ Maintainer of Emacs-substrate:
 Creator and maintainer of Emacs-bedrock:
 
  - [Ashton Wiersdorf](https://lambdaland.org)
+
+G
