@@ -37,6 +37,9 @@
 (defcustom substrate-configure-theme t
   "Configure the default theme (evangelion) as part of the substrate init"
   :type 'boolean :group 'substrate)
+(defcustom substrate-enable-evil nil
+  "Enable evil-mode and the Vi-like keyboard mapping"
+  :type 'boolean :group 'substrate)
 
 
 (defun substrate-set-theme (theme)
@@ -138,6 +141,25 @@ If the new path's directories does not exist, create them."
     :if substrate-enable-which-key
     :config
     (which-key-mode))
+
+  (use-package evil
+    :ensure t
+    :if substrate-enable-evil
+
+    :init
+    (setq evil-respect-visual-line-mode t)
+    (setq evil-undo-system 'undo-redo)
+
+    :config
+    (evil-mode)
+
+    ;; If you use Magit, start editing in insert state
+    (add-hook 'git-commit-setup-hook 'evil-insert-state)
+
+    ;; Configuring initial major mode for some modes
+    (evil-set-initial-state 'eat-mode 'emacs)
+    (evil-set-initial-state 'vterm-mode 'emacs))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
