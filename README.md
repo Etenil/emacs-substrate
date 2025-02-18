@@ -87,7 +87,9 @@ Basic code editing: line numbers and `hl-line-mode`.
 
 ## Philosophy
 
-TODO
+- Maintainable: Substrate is a library and can be easily updated
+- Unobtrusive: provide sound defaults but don't take over emacs's config system
+- Minimal: only provide the minimum to get started and no more. Configuration is part of the Emacs'experience
 
 ## Requirements
 
