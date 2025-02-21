@@ -31,9 +31,6 @@
 (defcustom substrate-display-line-numbers t
   "Display line numbers on buffers"
   :type 'boolean :group 'substrate)
-(defcustom substrate-enable-cua-mode t
-  "Enable CUA mode or not"
-  :type 'boolean :group 'substrate)
 (defcustom substrate-configure-theme t
   "Configure the default theme (evangelion) as part of the substrate init"
   :type 'boolean :group 'substrate)
@@ -53,6 +50,50 @@
                                #'substrate--load-theme-daemon)
                   (fmakunbound 'substrate--load-theme-daemon)))
     (load-theme theme t)))
+
+(defun substrate--insert-centered-line (text)
+  (let ((window-width (window-width))
+	(text-width (length text)))
+    (dotimes (num (/ (- window-width text-width) 2))
+      (insert " "))
+    (insert text)
+    (insert "\n")
+    ))
+
+(defvar substrate--splash-screen-lines
+  '("     .⌒.        "
+    "   .#   #.      "
+    "  /       \\     "
+    " (,,,___,,,)    "
+    "     ) (        "
+    "    (___)      \n"
+
+
+    "Welcome to Emacs Substrate!\n\n\n\n"
+    "Quickstart:\n\n"
+    "←↑↓→             move around       "
+    "Ctrl+x Ctrl+c    quit              "
+    "Ctrl+h t         start the tutorial"
+    ))
+
+(defun substrate-splash-screen ()
+  (setq inhibit-startup-screen t)
+  (let ((splash-buffer (get-buffer-create "*GNU Emacs*")))
+    (with-current-buffer splash-buffer
+      (let ((inhibit-read-only t))
+	(erase-buffer)
+	(setq default-directory nil)
+
+	(mapc #'substrate--insert-centered-line substrate--splash-screen-lines)
+
+	(set-buffer-modified-p nil)
+	(view-mode-enter nil 'kill-buffer)
+	(goto-char (point-min))
+
+	(switch-to-buffer splash-buffer)
+	))))
+
+(add-hook 'emacs-startup-hook #'substrate-splash-screen)
 
 (defun substrate-init ()
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -220,10 +261,6 @@ If the new path's directories does not exist, create them."
   ;; Misc. UI tweaks
   (blink-cursor-mode -1)		; Steady cursor
   (pixel-scroll-precision-mode)		; Smooth scrolling
-
-  ;; Use common keystrokes by default
-  (when substrate-enable-cua-mode
-    (cua-mode))
 
   ;; Display line numbers in programming mode
   (when substrate-display-line-numbers
