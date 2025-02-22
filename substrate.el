@@ -77,21 +77,21 @@
     ))
 
 (defun substrate-splash-screen ()
-  (setq inhibit-startup-screen t)
-  (let ((splash-buffer (get-buffer-create "*GNU Emacs*")))
-    (with-current-buffer splash-buffer
-      (let ((inhibit-read-only t))
-	(erase-buffer)
-	(setq default-directory nil)
+  (unless inhibit-startup-screen
+    (setq inhibit-startup-screen t)
+    (let ((splash-buffer (get-buffer-create "*GNU Emacs*")))
+      (with-current-buffer splash-buffer
+	(let ((inhibit-read-only t))
+	  (erase-buffer)
 
-	(mapc #'substrate--insert-centered-line substrate--splash-screen-lines)
+	  (mapc #'substrate--insert-centered-line substrate--splash-screen-lines)
 
-	(set-buffer-modified-p nil)
-	(view-mode-enter nil 'kill-buffer)
-	(goto-char (point-min))
+	  (set-buffer-modified-p nil)
+	  (view-mode-enter nil 'kill-buffer)
+	  (goto-char (point-min))
 
-	(switch-to-buffer splash-buffer)
-	))))
+	  (switch-to-buffer splash-buffer)
+	  )))))
 
 (add-hook 'emacs-startup-hook #'substrate-splash-screen)
 
