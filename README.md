@@ -129,13 +129,8 @@ Basic code editing: line numbers and `hl-line-mode`.
 
 ## Requirements
 
-Emacs 29.1 or later.
-
-Emacs 29.1 is, as of 2023-09-04, the latest stable release. The specific features from Emacs 29.1 that Substrate relies on are:
-
- - Enhancements to the built-in completion help (`completions-auto-select`, `completion-auto-help`, etc.)
- - Built-in tree-sitter support
- - Built-in LSP client (Eglot)
+- Emacs 29.1 or later.
+- Git
 
 ## Credits
 
@@ -147,6 +142,6 @@ Maintainer of Emacs-substrate:
 
 Creator and maintainer of Emacs-bedrock:
 
- - [Ashton Wiersdorf](https://lambdaland.org)
+- [Ashton Wiersdorf](https://lambdaland.org)
 
 G
