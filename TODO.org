@@ -1,3 +1,4 @@
-* Provide a one-script install for busy people
-* Add config for popular vim-like input system
-* Pick useful bits of config from bedrock extras
+* DONE Provide a one-script install for busy people
+* DONE Add config for popular vim-like input system
+* TODO Pick useful bits of config from bedrock extras
+* TODO Migrate to straight-based upgrade after initial install

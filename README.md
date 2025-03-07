@@ -2,7 +2,16 @@
 
 A clean basis to organically grow your config onto.
 
-**NOTICE:** Requires Emacs 29.1 or better.
+```
+	 .⌒.      ▗▄▄▖▗  ▖ ▗▖  ▗▄  ▄▄      ▄▄ ▗  ▖▗▄▄  ▄▄ ▄▄▄▖▗▄▄  ▗▖ ▄▄▄▖▗▄▄▖
+   .#   #.    ▐   ▐▌▐▌ ▐▌ ▗▘ ▘▐▘ ▘    ▐▘ ▘▐  ▌▐  ▌▐▘ ▘ ▐  ▐ ▝▌ ▐▌  ▐  ▐
+  /       \   ▐▄▄▖▐▐▌▌ ▌▐ ▐   ▝▙▄     ▝▙▄ ▐  ▌▐▄▄▘▝▙▄  ▐  ▐▄▄▘ ▌▐  ▐  ▐▄▄▖
+ (,,,___,,,)  ▐   ▐▝▘▌ ▙▟ ▐     ▝▌      ▝▌▐  ▌▐  ▌  ▝▌ ▐  ▐ ▝▖ ▙▟  ▐  ▐
+	 ) (      ▐▄▄▖▐  ▌▐  ▌ ▚▄▘▝▄▟▘    ▝▄▟▘▝▄▄▘▐▄▄▘▝▄▟▘ ▐  ▐  ▘▐  ▌ ▐  ▐▄▄▖
+	(___)
+```
+
+**NOTICE:** Requires Emacs 29.1 or newer.
 
 ## Description
 
@@ -12,6 +21,7 @@ This is a minimal Emacs base config. Here's the short of the philosophy:
  - Emacs-lisp centric, encourage configuration through code
  - Provide an upgrade path for Substrate
  - Stay minimal, only include as little packages and config as possible
+ - Encourage tweaking and coding of Emacs and its ecosystem
  - Keep to the project vision, even though users are free to turn features off
 
 ## Installation
@@ -66,7 +76,6 @@ And restart emacs.
 
 Substrate can be configured through Emacs's built-in customisation framework. To access it, use `M-x customize` and search for `substrate`. Alternatively, set the options with `setopt` in your init file. The available options are:
 
-- `substrate-initialise-packages`: Initialise the substrate package system (straight.el) - default `t`
 - `substrate-enable-windmove`: Enable windmove to hop around windows with ctrl+arrow - default `t`
 - `substrate-display-startup-help`: Show a help window on startup - default `t`
 - `substrate-enable-which-key`: Use which-key to list available key combos - default `t`
@@ -79,7 +88,6 @@ If you'd rather use `setopt` to configure those variables, it can be used like s
 
 ```lisp
 ;; Configure all the opposite defaults for substrate
-(setopt substrate-initialise-packages nil)
 (setopt substrate-enable-windmove nil)
 (setopt substrate-display-startup-help nil)
 (setopt substrate-enable-which-key nil)
@@ -102,6 +110,11 @@ Then set your favourite theme. Instead of using `load-theme`, use `substrate-set
 ```lisp
 (use-package nord-theme
 	:config (substrate-set-theme 'nord))
+
+;; Or
+
+(straight-use-package 'nord-theme)
+(substrate-set-theme 'nord)
 ```
 
 ## Screenshots
@@ -126,7 +139,6 @@ Emacs 29.1 or later.
 
 Emacs 29.1 is, as of 2023-09-04, the latest stable release. The specific features from Emacs 29.1 that Substrate relies on are:
 
- - The `use-package` macro for configuration
  - Enhancements to the built-in completion help (`completions-auto-select`, `completion-auto-help`, etc.)
  - Built-in tree-sitter support
  - Built-in LSP client (Eglot)

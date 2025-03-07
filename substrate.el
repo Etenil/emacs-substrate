@@ -16,9 +16,6 @@
 ;;; Custom variables
 
 (defgroup substrate nil "Custom options for substrate")
-(defcustom substrate-initialise-packages t
-  "Initialise the substrate package system (straight.el)"
-  :type 'boolean :group 'substrate)
 (defcustom substrate-enable-windmove t
   "Enable windmove to hop around windows with ctrl+arrow"
   :type 'boolean :group 'substrate)
@@ -104,29 +101,28 @@
 
   ;; Package initialization
   ;;
-  (when substrate-initialise-packages
-    ;; Set up package and enable melpa
-    (require 'package)
-    (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-    (package-initialize)
+  ;; Set up package and enable melpa
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (package-initialize)
 
-    ;; Boostrap straight.el
-    (defvar bootstrap-version)
-    (let ((bootstrap-file
-	   (expand-file-name
-            "straight/repos/straight.el/bootstrap.el"
-            (or (bound-and-true-p straight-base-dir)
-		user-emacs-directory)))
-	  (bootstrap-version 7))
-      (unless (file-exists-p bootstrap-file)
-	(with-current-buffer
-            (url-retrieve-synchronously
-             "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-             'silent 'inhibit-cookies)
-	  (goto-char (point-max))
-	  (eval-print-last-sexp)))
-      (load bootstrap-file nil 'nomessage))
-    (setq straight-use-package-by-default t))
+  ;; Boostrap straight.el
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+	 (expand-file-name
+          "straight/repos/straight.el/bootstrap.el"
+          (or (bound-and-true-p straight-base-dir)
+	      user-emacs-directory)))
+	(bootstrap-version 7))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+	(goto-char (point-max))
+	(eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+  (setq straight-use-package-by-default t)
 
   (setopt initial-major-mode 'fundamental-mode)	; default mode for the *scratch* buffer
   (setopt display-time-default-load-average nil) ; this information is useless for most
@@ -137,7 +133,7 @@
   ;; https://todo.sr.ht/~ashton314/emacs-bedrock/11
   (setopt auto-revert-interval 5)
   (setopt auto-revert-check-vc-info t)
-  (global-auto-revert-mode)
+  (global-auto-revert-mode t)
 
   ;; Save history of minibuffer
   (savehist-mode)
@@ -177,21 +173,15 @@ If the new path's directories does not exist, create them."
 
   ;; which-key: shows a popup of available keybindings when typing a long key
   ;; sequence (e.g. C-x ...)
-  (use-package which-key
-    :ensure t
-    :if substrate-enable-which-key
-    :config
+
+  (when substrate-enable-which-key
+    (straight-use-package 'which-key)
     (which-key-mode))
 
-  (use-package evil
-    :ensure t
-    :if substrate-enable-evil
-
-    :init
+  (when substrate-enable-evil
     (setq evil-respect-visual-line-mode t)
     (setq evil-undo-system 'undo-redo)
-
-    :config
+    (straight-use-package 'evil)
     (evil-mode)
 
     ;; If you use Magit, start editing in insert state
@@ -293,10 +283,10 @@ If the new path's directories does not exist, create them."
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (use-package evangelion-theme
-    :if substrate-configure-theme
-    :ensure t
-    :config (substrate-set-theme 'evangelion))
+  (when substrate-configure-theme
+    (straight-use-package 'challenger-deep-theme)
+    (substrate-set-theme 'challenger-deep))
+
 
 ;;; Relegate automatic custom variables to their own file.
   (setq custom-file (expand-file-name "custom-vars.el"))
