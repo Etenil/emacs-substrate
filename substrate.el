@@ -29,7 +29,7 @@
   "Display line numbers on buffers"
   :type 'boolean :group 'substrate)
 (defcustom substrate-configure-theme t
-  "Configure the default theme (evangelion) as part of the substrate init"
+  "Configure the default theme as part of the substrate init"
   :type 'boolean :group 'substrate)
 (defcustom substrate-enable-evil nil
   "Enable evil-mode and the Vi-like keyboard mapping"
