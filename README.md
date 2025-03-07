@@ -127,12 +127,6 @@ Basic code editing: line numbers and `hl-line-mode`.
 
 ![Editing the source code of Emacs Substrate's substrate.el file while using Substrate configuration](screenshots/substrate-editing.png)
 
-## Philosophy
-
-- Maintainable: Substrate is a library and can be easily updated
-- Unobtrusive: provide sound defaults but don't take over emacs's config system
-- Minimal: only provide the minimum to get started and no more. Configuration is part of the Emacs'experience
-
 ## Requirements
 
 Emacs 29.1 or later.
