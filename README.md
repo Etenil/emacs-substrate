@@ -144,4 +144,3 @@ Creator and maintainer of Emacs-bedrock:
 
 - [Ashton Wiersdorf](https://lambdaland.org)
 
-G
