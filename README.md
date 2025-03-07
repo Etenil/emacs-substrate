@@ -119,7 +119,7 @@ Then set your favourite theme. Instead of using `load-theme`, use `substrate-set
 
 ## Screenshots
 
-What you should see on opening Emacs up with Substrate installed: a simple splash screen, [modus-vivendi](https://protesilaos.com/emacs/modus-themes) active, and the `help-quick` display at the bottom.
+What you should see on opening Emacs up with Substrate installed: a simple splash screen, and the `help-quick` display at the bottom.
 
 ![Emacs using Substrate configuration showing the splash screen with the quick help at the bottom](screenshots/substrate-home-screen.png)
 
